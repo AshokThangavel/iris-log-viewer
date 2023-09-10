@@ -98,6 +98,7 @@
  	>
 	&html<<button type="button" class="btn btn-primary" onclick="goClickButton('DISPLAY')">Display</button>>
 	&html<<button type="button" class="btn btn-dark" onclick="goClickButton('RAW')">Raw</button>>
+	&html<<br><input id="myInput" class="myInput" type="text" placeholder="Search..."> >
 	&html<<hr>>
 	//
 	If ($Get(iAlerts) = "true") {
@@ -162,6 +163,14 @@ function goClickButton(id)
 	var params = "iAlerts=" + iAlerts + params1 + params2;
 	document.location = "irislogviewer.csp?" + params
 }
+$(document).ready(function(){
+		  $("#myInput").on("keyup", function() {
+		    var value = $(this).val().toLowerCase();
+		    $("#myTable tr").filter(function() {
+		      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		    });
+		  });
+		});
 </script>
 
 </html>

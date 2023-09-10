@@ -222,6 +222,7 @@ ClassMethod OutputRawData(ByRef pLines) As %Status
 	Set tQuote = """"
 	Set tSC = $$$OK
 	Write !,"<tr><th>Raw Text</th></tr>"
+	Write !,"<tbody id=""myTable"">"
 	Set max = $Get(pLines,0)
 	For ii = 1:1:max {
 	 	Set tDisplay = pLines(ii)
@@ -231,6 +232,7 @@ ClassMethod OutputRawData(ByRef pLines) As %Status
 		Write !,"<td>",tDisplay,"</td>"
 		Write !,"</tr>"
 	}
+	Write !,"</tbody>"
 	Quit tSC
 }
 
@@ -253,7 +255,7 @@ ClassMethod OutputTableData(pAlertFlag = 0) As %Status
 	ELSEIF (tResult.%SQLCODE=-361) { /*WRITE !,"Query exists: ",tResult.%Message*/ }
 	ELSE { /*WRITE !,"CREATE QUERY error: ",tResult.%SQLCODE," ",tResult.%Message*/ QUIT tSC}
 	&html<<thead class="thead-dark"><tr><th>Date</th><th>Time</th><th>Job</th><th>L</th><th>Text</th></tr></thead>>
-	&html<<tbody>>
+	&html<<tbody id="myTable">>
 	;Write !,"<tr><th>Date</th><th>Time</th><th>Job</th><th>L</th><th>Text</th></tr>"
 	While tResult.%Next() {
 		Set tValue = tResult.ID
